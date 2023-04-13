@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>验证密码</title>
+  <script src="./vconsole.min.js"></script>
+  <script src="./common.js"></script>
+  <script>
+    function finishPasswordInput(data, callback) {
+      console.log("got password from native");
+    }
+
+    function startPasswordVerify() {
+      console.log("startPasswordVerify");
+      callNativeHandler("startPasswordVerify");
+
+      registerWebHandler("finishPasswordInput", finishPasswordInput);
+    }
+  </script>
+</head>
+<body>
+  
+  <div>本页面用来演示交易流程中密码验证过程</div>
+  <br>
+  交易金额：<input type="number">
+  <br>
+  <button onclick="startPasswordVerify()">确定</button>
+</body>
+</html>
