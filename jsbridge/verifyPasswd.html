@@ -10,14 +10,34 @@
   <script>
     function finishPasswordInput(data, callback) {
       console.log("got password from native");
+
+      var action = data["action"];
+      if (parseInt(action) !== 0) {
+        console.log("用户取消交易")
+        return;
+      }
+
+      var code = 0;
+      var message = "success";
+      if (Math.random() > 0.2) {
+        code = 1;
+        message = "failure";
+      }
+
+      setTimeout(() => {
+        callback({
+          code,
+          message
+        });
+      }, 5000);
     }
 
     function startPasswordVerify() {
       console.log("startPasswordVerify");
       callNativeHandler("startPasswordVerify");
-
-      registerWebHandler("finishPasswordInput", finishPasswordInput);
     }
+
+    registerWebHandler("finishPasswordInput", finishPasswordInput);
   </script>
 </head>
 <body>
